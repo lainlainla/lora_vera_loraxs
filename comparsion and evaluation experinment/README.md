@@ -4,6 +4,7 @@ This directory contains the concrete code layer for the LoRA / VeRA / LoRA-XS / 
 
 ## What is included
 
+- `../colab_glue_experiment.ipynb`: Colab-first notebook entrypoint using public GLUE datasets.
 - `models/lora.py`: LoRA adapter wrapper for `nn.Linear`.
 - `models/vera.py`: VeRA adapter wrapper for `nn.Linear`.
 - `models/loraxs.py`: LoRA-XS adapter wrapper for `nn.Linear`.
@@ -23,8 +24,15 @@ This directory contains the concrete code layer for the LoRA / VeRA / LoRA-XS / 
 
 ## Quick commands
 
+Colab entrypoint:
+
+```text
+colab_glue_experiment.ipynb
+```
+
+Local development utilities:
+
 ```powershell
-python ".\comparsion and evaluation experinment\experiments\smoke_test.py"
 python ".\comparsion and evaluation experinment\experiments\list_settings.py" --kind all
 python ".\comparsion and evaluation experinment\experiments\projection_formula_check.py"
 python ".\comparsion and evaluation experinment\experiments\parameter_tradeoff.py" --setting paper-style
@@ -34,7 +42,10 @@ python ".\comparsion and evaluation experinment\experiments\tinylora_tying_sweep
 
 ## Notes
 
-The code is intentionally independent of GLUE downloads and RL frameworks. It answers the current design questions first:
+The notebook uses real public GLUE data through Hugging Face `datasets`.
+The small `smoke_test.py` file is development-only and is not the final experiment interface.
+
+The code answers the current design questions first:
 
 - how to inspect method-level settings independently from experiment-level settings;
 - whether LoRA-XS gains are confounded by adapting more modules;
