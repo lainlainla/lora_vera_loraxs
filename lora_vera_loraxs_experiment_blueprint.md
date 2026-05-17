@@ -752,6 +752,8 @@ Overhead_{\text{SVD}}
 
 ```text
 project/
+  colab_glue_experiment.ipynb
+  colab_run_glue.py
   models/
     common.py
     basis.py
@@ -772,12 +774,13 @@ project/
     glue_coverage_matched.py
     tinylora_tying.py
   experiments/
+    colab_glue_runner.py
     list_settings.py
     parameter_tradeoff.py
     projection_formula_check.py
     toy_convergence.py
     tinylora_tying_sweep.py
-    smoke_test.py
+    smoke_test.py  # development-only，不作为最终实验入口
   scripts/
     run_glue_lora.sh
     run_glue_vera.sh
@@ -792,6 +795,9 @@ project/
 当前仓库已补充的最小可执行代码位于：
 
 ```text
+colab_glue_experiment.ipynb
+colab_run_glue.py
+
 comparsion and evaluation experinment/
   models/
     common.py
@@ -814,18 +820,20 @@ comparsion and evaluation experinment/
     glue_coverage_matched.py
     tinylora_tying.py
   experiments/
+    colab_glue_runner.py
     list_settings.py
     parameter_tradeoff.py
     projection_formula_check.py
     toy_convergence.py
     tinylora_tying_sweep.py
-    smoke_test.py
+    smoke_test.py  # development-only
 ```
 
 组织原则：
 
 - **model 粒度**：每种 adapter 的实现和默认设定各自独立成 `.py`，例如 `models/lora.py` 与 `model_settings/lora.py`；
 - **experiment 粒度**：每个实验组合独立成 `.py`，只引用已有 model setting，不在实验脚本中重复写方法配置；
+- **Colab 入口**：最终运行接口可以使用 `colab_glue_experiment.ipynb` 或 `colab_run_glue.py`，通过 Hugging Face `datasets.load_dataset("glue", task)` 下载公开 GLUE 数据；
 - `models/adapters.py` 只作为兼容导出入口，避免旧脚本失效。
 
 ### 6.2 方法实现要求
