@@ -5,6 +5,7 @@ This directory contains the concrete code layer for the LoRA / VeRA / LoRA-XS / 
 ## What is included
 
 - `../colab_glue_experiment.ipynb`: Colab-first notebook entrypoint using public GLUE datasets.
+- `../colab_run_glue.py`: Colab CLI entrypoint using the same real GLUE runner.
 - `models/lora.py`: LoRA adapter wrapper for `nn.Linear`.
 - `models/vera.py`: VeRA adapter wrapper for `nn.Linear`.
 - `models/loraxs.py`: LoRA-XS adapter wrapper for `nn.Linear`.
@@ -28,6 +29,18 @@ Colab entrypoint:
 
 ```text
 colab_glue_experiment.ipynb
+```
+
+Colab CLI entrypoint:
+
+```bash
+!python colab_run_glue.py --task sst2 --base-model roberta-base --model-setting lora_qv_r8
+```
+
+Use full public splits instead of quick subsets:
+
+```bash
+!python colab_run_glue.py --task sst2 --model-setting loraxs_qv_r8 --max-train-samples -1 --max-eval-samples -1
 ```
 
 Local development utilities:
