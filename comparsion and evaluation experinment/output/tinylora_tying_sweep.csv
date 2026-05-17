@@ -1,0 +1,6 @@
+variant,tie_case,tie_every,tie_groups,trainable_params,final_loss
+TinyLoRA,zero_update_baseline,,0,0,0.9316614270210266
+TinyLoRA,full_model_tie,48,1,1,0.9306691288948059
+TinyLoRA,per_layer_tie,4,12,12,0.8784909248352051
+TinyLoRA,no_tie,1,48,48,0.7825567722320557
+LoRA-XS-direct-R,per_module_R,1,48,192,0.1823878288269043
