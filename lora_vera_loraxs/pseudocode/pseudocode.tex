@@ -1,0 +1,69 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\begin{document}
+	
+	\section{Training Procedure}
+	
+	\begin{algorithm}[t]
+		\caption{LoRA-XS Training Procedure}
+		\label{alg:loraxs}
+		\begin{algorithmic}[1]
+			\Require Pre-trained model $f_{\theta_0}$, training data $\mathcal{D}$, target modules $\mathcal{M}$, rank $r$, learning rate $\eta$, epochs $E$
+			\Ensure Fine-tuned LoRA-XS parameters $\{R_j\}_{j\in\mathcal{M}}$
+			
+			\State Freeze all pre-trained parameters $\theta_0$.
+			
+			\For{each target module $W_j \in \mathcal{M}$}
+			\State Compute truncated singular value decomposition:
+			\[
+			W_j = U_j \Sigma_j V_j^\top .
+			\]
+			\State Keep the top-$r$ singular components:
+			\[
+			U_{j,r}, \quad \Sigma_{j,r}, \quad V_{j,r}.
+			\]
+			\State Freeze $U_{j,r}$, $\Sigma_{j,r}$, and $V_{j,r}$.
+			\State Initialize the trainable matrix:
+			\[
+			R_j \in \mathbb{R}^{r\times r}.
+			\]
+			\State Define the LoRA-XS weight update:
+			\[
+			\Delta W_j
+			=
+			U_{j,r}\Sigma_{j,r}R_jV_{j,r}^{\top}.
+			\]
+			\EndFor
+			
+			\For{$e = 1$ to $E$}
+			\For{each mini-batch $(x,y)\in\mathcal{D}$}
+			\State Compute prediction:
+			\[
+			\hat{y}=f_{\theta_0,\{R_j\}}(x).
+			\]
+			\State Compute training loss:
+			\[
+			\mathcal{L}=\ell(\hat{y},y).
+			\]
+			\State Compute gradients with respect to trainable matrices:
+			\[
+			\nabla_{R_j}\mathcal{L}, \quad j\in\mathcal{M}.
+			\]
+			\State Update only LoRA-XS parameters:
+			\[
+			R_j \leftarrow R_j-\eta\nabla_{R_j}\mathcal{L}.
+			\]
+			\EndFor
+			\EndFor
+			
+			\State \textbf{return} $\{R_j\}_{j\in\mathcal{M}}$
+		\end{algorithmic}
+	\end{algorithm}
+	
+\end{document}
+
