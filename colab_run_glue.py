@@ -83,6 +83,7 @@ def main() -> None:
         "method": summary["model_setting"]["method"],
         "setting": summary["model_setting"]["name"],
         "trainable_params": summary["trainable_params"],
+        "adapter_trainable_params": summary["adapter_trainable_params"],
         "trainable_ratio": summary["trainable_ratio"],
         "classifier_trainable_params": summary["classifier_trainable_params"],
         "svd_time_seconds": summary["svd_time_seconds"],

@@ -772,6 +772,7 @@ project/
     glue_same_target.py
     glue_paper_style.py
     glue_coverage_matched.py
+    glue_tinylora_tying.py
     tinylora_tying.py
   experiments/
     colab_glue_runner.py
@@ -818,6 +819,7 @@ comparsion and evaluation experinment/
     glue_same_target.py
     glue_paper_style.py
     glue_coverage_matched.py
+    glue_tinylora_tying.py
     tinylora_tying.py
   experiments/
     colab_glue_runner.py
