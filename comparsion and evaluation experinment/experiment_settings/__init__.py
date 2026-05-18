@@ -4,6 +4,7 @@ from .base import ExperimentSetting
 from .glue_coverage_matched import GLUE_COVERAGE_MATCHED
 from .glue_paper_style import GLUE_PAPER_STYLE
 from .glue_same_target import GLUE_SAME_TARGET
+from .glue_tinylora_tying import GLUE_TINYLORA_TYING
 from .tinylora_tying import TINYLORA_TYING
 
 
@@ -11,6 +12,7 @@ ALL_EXPERIMENT_SETTINGS: tuple[ExperimentSetting, ...] = (
     GLUE_SAME_TARGET,
     GLUE_PAPER_STYLE,
     GLUE_COVERAGE_MATCHED,
+    GLUE_TINYLORA_TYING,
     TINYLORA_TYING,
 )
 

@@ -175,6 +175,7 @@ def run_glue_experiment(config: GlueRunConfig) -> dict[str, Any]:
 
     total_params = count_parameters(model)
     trainable_params = count_trainable_parameters(model)
+    adapter_trainable_params = trainable_params - classifier_params
     data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
     training_args = make_training_arguments(config, run_dir)
 
@@ -203,6 +204,7 @@ def run_glue_experiment(config: GlueRunConfig) -> dict[str, Any]:
         "config": asdict(config),
         "total_params": total_params,
         "trainable_params": trainable_params,
+        "adapter_trainable_params": adapter_trainable_params,
         "trainable_ratio": trainable_params / max(total_params, 1),
         "classifier_trainable_params": classifier_params,
         "adapter_records": [asdict(record) for record in adapter_records],

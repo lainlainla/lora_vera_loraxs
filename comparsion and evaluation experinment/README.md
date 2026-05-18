@@ -37,6 +37,22 @@ Colab CLI entrypoint:
 !python colab_run_glue.py --task sst2 --base-model roberta-base --model-setting lora_qv_r8
 ```
 
+TinyLoRA same-target tying sweep:
+
+```bash
+!python colab_run_glue.py --task sst2 --base-model roberta-base --model-setting tinylora_qv_full_tie_u1_r2 --max-train-samples -1 --max-eval-samples -1 --epochs 3
+!python colab_run_glue.py --task sst2 --base-model roberta-base --model-setting tinylora_qv_per_layer_tie_u1_r2 --max-train-samples -1 --max-eval-samples -1 --epochs 3
+!python colab_run_glue.py --task sst2 --base-model roberta-base --model-setting tinylora_qv_no_tie_u1_r2 --max-train-samples -1 --max-eval-samples -1 --epochs 3
+```
+
+TinyLoRA paper-style coverage:
+
+```bash
+!python colab_run_glue.py --task sst2 --base-model roberta-base --model-setting tinylora_qvo_fc1_full_tie_u1_r2 --max-train-samples -1 --max-eval-samples -1 --epochs 3
+!python colab_run_glue.py --task sst2 --base-model roberta-base --model-setting tinylora_qvo_fc1_per_layer_tie_u1_r2 --max-train-samples -1 --max-eval-samples -1 --epochs 3
+!python colab_run_glue.py --task sst2 --base-model roberta-base --model-setting tinylora_qvo_fc1_no_tie_u1_r2 --max-train-samples -1 --max-eval-samples -1 --epochs 3
+```
+
 Use full public splits instead of quick subsets:
 
 ```bash
